@@ -38,7 +38,9 @@ module.exports = {
 			'error',
 			'WithStatement',
 		],
+		'no-shadow': 'off',
 		'no-tabs': 'off',
+		'no-undef': 'off',
 		'no-unused-vars': 'off',
 	},
 };
