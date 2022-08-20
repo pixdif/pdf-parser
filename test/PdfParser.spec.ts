@@ -14,4 +14,12 @@ it('reads a page', async () => {
 	const page = await parser.getImage(1);
 	const output = fs.createWriteStream('output/shape.png');
 	page.pipe(output);
+
+	await new Promise((resolve) => {
+		output.once('finish', resolve);
+	});
+});
+
+it('closes a PDF file', async () => {
+	await parser.close();
 });

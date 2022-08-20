@@ -26,11 +26,20 @@ async function convertPdfPage(page: PDFPageProxy): Promise<Readable> {
 export default class PdfParser extends Parser {
 	protected document?: PDFDocumentProxy;
 
-	async open(): Promise<number> {
+	protected async openFile(): Promise<number> {
 		if (!this.document) {
 			this.document = await getDocument(this.filePath).promise;
 		}
 		return this.document.numPages;
+	}
+
+	protected async closeFile(): Promise<void> {
+		if (!this.document) {
+			throw new Error('The PDF document is not open yet.');
+		}
+		await this.document.cleanup(false);
+		await this.document.destroy();
+		delete this.document;
 	}
 
 	async getName(index: number): Promise<string> {
