@@ -1,39 +1,29 @@
-import { Readable } from 'stream';
-import Parser from '@pixdif/parser';
+import Parser, { Outline } from '@pixdif/parser';
+
+import PdfOutline from './base/PdfOutline';
+import PdfPage from './base/PdfPage';
 import {
 	getDocument,
 	PDFDocumentProxy,
-	PDFPageProxy,
 } from './util/pdfjs';
 
-import NodeCanvasFactory from './base/NodeCanvasFactory';
-
-const canvasFactory = new NodeCanvasFactory();
-
-async function convertPdfPage(page: PDFPageProxy): Promise<Readable> {
-	const viewport = page.getViewport({ scale: 2 });
-	const cvs = canvasFactory.create(viewport.width, viewport.height);
-	const renderContext = {
-		canvasContext: cvs.context,
-		viewport,
-		canvasFactory,
-	};
-
-	await page.render(renderContext).promise;
-	return cvs.canvas.createPNGStream();
+interface RawOutline {
+	title: string;
+	dest: string | unknown[] | null;
+	count?: number;
+	items?: RawOutline[];
 }
 
 export default class PdfParser extends Parser {
 	protected document?: PDFDocumentProxy;
 
-	protected async openFile(): Promise<number> {
+	protected override async openFile(): Promise<void> {
 		if (!this.document) {
 			this.document = await getDocument(this.filePath).promise;
 		}
-		return this.document.numPages;
 	}
 
-	protected async closeFile(): Promise<void> {
+	protected override async closeFile(): Promise<void> {
 		if (!this.document) {
 			throw new Error('The PDF document is not open yet.');
 		}
@@ -42,19 +32,40 @@ export default class PdfParser extends Parser {
 		delete this.document;
 	}
 
-	async getName(index: number): Promise<string> {
-		if (!this.document) {
-			throw new Error('The PDF document is not open yet.');
+	override async getPageNum(): Promise<number> {
+		if (this.document) {
+			return this.document.numPages;
 		}
-		return String(index);
+		return 0;
 	}
 
-	async getImage(index: number): Promise<Readable> {
+	override async getPage(index: number): Promise<PdfPage | undefined> {
 		if (!this.document) {
-			throw new Error('The PDF document is not open yet.');
+			return;
 		}
-		const page = await this.document.getPage(index);
-		const image = await convertPdfPage(page);
-		return image;
+		const pageIndex = index + 1;
+		const page = await this.document.getPage(pageIndex);
+		return new PdfPage(`Page ${pageIndex}`, page);
 	}
+
+	override async getOutline(): Promise<Outline[]> {
+		const outline = await this.document?.getOutline();
+		if (!outline) {
+			return [];
+		}
+		return outline.map(this.wrapOutline);
+	}
+
+	private wrapOutline = ({
+		title,
+		items,
+	}: RawOutline): PdfOutline => {
+		const children = items?.length > 0 ? items.map(this.wrapOutline) : undefined;
+		return new PdfOutline(this.document, {
+			title,
+			children,
+			offset: 0,
+			limit: 0,
+		});
+	};
 }
