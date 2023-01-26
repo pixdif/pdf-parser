@@ -1,6 +1,7 @@
 {
 	"compilerOptions": {
 		"outDir": "dist",
+		"target": "ES2020",
 		"module": "Node16",
 		"moduleResolution": "Node",
 		"esModuleInterop": true,
