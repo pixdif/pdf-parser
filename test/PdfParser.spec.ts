@@ -1,4 +1,11 @@
 import fs from 'fs';
+import {
+	describe,
+	it,
+	expect,
+	beforeAll,
+	afterAll,
+} from '@jest/globals';
 
 import PdfParser from '../src';
 
