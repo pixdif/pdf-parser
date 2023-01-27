@@ -39,9 +39,12 @@ export default class PdfParser extends Parser {
 		return 0;
 	}
 
-	override async getPage(index: number): Promise<PdfPage | undefined> {
+	override async getPage(index: number): Promise<PdfPage> {
 		if (!this.document) {
-			return;
+			throw new Error('The PDF file is not open yet.');
+		}
+		if (index < 0 || index >= await this.getPageNum()) {
+			throw new Error(`Invalid page index: ${index}`);
 		}
 		const pageIndex = index + 1;
 		const page = await this.document.getPage(pageIndex);
