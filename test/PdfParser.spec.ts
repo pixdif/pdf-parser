@@ -29,7 +29,7 @@ describe('Simple PDF File', () => {
 	it('reads a page', async () => {
 		const page = await parser.getPage(0);
 		const output = fs.createWriteStream('output/shape.png');
-		const image = await page?.getImage();
+		const image = await page?.render();
 		image?.pipe(output);
 		await new Promise((resolve) => {
 			output.once('finish', resolve);

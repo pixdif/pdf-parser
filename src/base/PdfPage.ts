@@ -21,7 +21,12 @@ export default class PdfPage extends Page {
 		return this.title;
 	}
 
-	async getImage(): Promise<Readable> {
+	// eslint-disable-next-line class-methods-use-this
+	isCached(): boolean {
+		return false;
+	}
+
+	async render(): Promise<Readable> {
 		const viewport = this.proxy.getViewport({ scale: 2 });
 		const cvs = canvasFactory.create(viewport.width, viewport.height);
 		const renderContext = {
