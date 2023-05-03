@@ -28,6 +28,9 @@ describe('Simple PDF File', () => {
 
 	it('reads a page', async () => {
 		const page = await parser.getPage(0);
+		expect(page.getTitle()).toBe('Page 1');
+		expect(page.isCached()).toBe(false);
+
 		const output = fs.createWriteStream('output/shape.png');
 		const image = await page?.render();
 		image?.pipe(output);
