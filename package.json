@@ -28,7 +28,7 @@
   "dependencies": {
     "@pixdif/parser": "^0.5.0",
     "canvas": "^2.11.2",
-    "pdfjs-dist": "^3.2.146"
+    "pdfjs-dist": "~3.2.146"
   },
   "devDependencies": {
     "@jest/globals": "^29.5.0",
