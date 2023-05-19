@@ -1,6 +1,6 @@
 {
   "name": "@pixdif/pdf-parser",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "PDF Parser",
   "main": "dist",
   "scripts": {
