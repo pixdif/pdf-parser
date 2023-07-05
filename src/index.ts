@@ -1,4 +1,4 @@
-import Parser, { Outline } from '@pixdif/parser';
+import { Parser, Outline } from '@pixdif/parser';
 
 import PdfOutline from './base/PdfOutline';
 import PdfPage from './base/PdfPage';
