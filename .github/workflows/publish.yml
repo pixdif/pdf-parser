@@ -27,7 +27,7 @@ jobs:
         name: Publish
         run: |
           cd dist
-          cp ../package.json > package.json
+          cp ../package.json package.json
           npm pkg set main=index.js
           npm pkg delete scripts
           npm pkg delete devDependencies
