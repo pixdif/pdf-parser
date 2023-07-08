@@ -27,7 +27,10 @@ jobs:
         name: Publish
         run: |
           cd dist
-          sed 's#"main": "dist"#"main": "index.js"#' ../package.json > package.json
+          cp ../package.json > package.json
+          npm pkg set main=index.js
+          npm pkg delete scripts
+          npm pkg delete devDependencies
           cp ../LICENSE .
           npm publish --access=public
         env:
