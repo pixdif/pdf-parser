@@ -30,7 +30,7 @@ export default class PdfPage extends Page {
 		const viewport = this.proxy.getViewport({ scale: 2 });
 		const cvs = canvasFactory.create(viewport.width, viewport.height);
 		const renderContext = {
-			canvasContext: cvs.context,
+			canvasContext: cvs.context as unknown as CanvasRenderingContext2D,
 			viewport,
 			canvasFactory,
 		};
