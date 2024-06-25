@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/pixdif/pdf-parser#readme",
   "dependencies": {
-    "@pixdif/parser": "^0.9.1",
+    "@pixdif/parser": "^0.10.0",
     "canvas": "^2.11.2",
     "pdfjs-dist": "~4.3.136"
   },
