@@ -1,11 +1,11 @@
 import { Parser, Outline } from '@pixdif/parser';
 
-import PdfOutline from './base/PdfOutline';
-import PdfPage from './base/PdfPage';
+import PdfOutline from './base/PdfOutline.js';
+import PdfPage from './base/PdfPage.js';
 import {
 	getDocument,
 	PDFDocumentProxy,
-} from './util/pdfjs';
+} from './util/pdfjs.js';
 
 interface RawOutline {
 	title: string;

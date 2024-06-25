@@ -7,7 +7,7 @@ import {
 	afterAll,
 } from '@jest/globals';
 
-import PdfParser from '../src';
+import PdfParser from '../src/index.js';
 
 describe('Simple PDF File', () => {
 	const parser = new PdfParser('test/sample/shape.pdf');

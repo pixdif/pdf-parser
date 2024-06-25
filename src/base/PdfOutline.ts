@@ -1,7 +1,7 @@
 import { Outline, OutlineProperties } from '@pixdif/parser';
 import { PDFDocumentProxy } from 'pdfjs-dist';
 
-import PdfPage from './PdfPage';
+import PdfPage from './PdfPage.js';
 
 export interface PdfOutlineProperties extends OutlineProperties {
 	title: string;

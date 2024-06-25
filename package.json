@@ -3,12 +3,13 @@
   "version": "0.9.0",
   "description": "PDF Parser",
   "main": "dist",
+  "type": "module",
   "scripts": {
     "build": "tsc",
     "debug": "tsc --incremental --sourceMap",
     "test": "npm run lint && npm run jest",
     "lint": "eslint --ext=js,ts .",
-    "jest": "jest --coverage"
+    "jest": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -28,12 +29,13 @@
   "dependencies": {
     "@pixdif/parser": "^0.9.1",
     "canvas": "^2.11.2",
-    "pdfjs-dist": "~3.11.174"
+    "pdfjs-dist": "~4.3.136"
   },
   "devDependencies": {
     "@types/node": "^20.8.9",
     "@typescript-eslint/eslint-plugin": "^7.11.0",
     "@typescript-eslint/parser": "^7.11.0",
+    "cross-env": "^7.0.3",
     "eslint": "^8.57.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.29.1",

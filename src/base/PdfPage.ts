@@ -2,7 +2,7 @@ import { Readable } from 'stream';
 import { Page } from '@pixdif/parser';
 import { PDFPageProxy } from 'pdfjs-dist';
 
-import NodeCanvasFactory from './NodeCanvasFactory';
+import NodeCanvasFactory from './NodeCanvasFactory.js';
 
 const canvasFactory = new NodeCanvasFactory();
 
