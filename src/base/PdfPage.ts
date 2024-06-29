@@ -1,6 +1,6 @@
 import { Readable } from 'stream';
 import { Page } from '@pixdif/parser';
-import { PDFPageProxy } from 'pdfjs-dist';
+import { PDFPageProxy } from '../util/pdfjs.js';
 
 import NodeCanvasFactory from './NodeCanvasFactory.js';
 

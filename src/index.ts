@@ -4,7 +4,7 @@ import PdfOutline from './base/PdfOutline.js';
 import PdfPage from './base/PdfPage.js';
 import {
 	getDocument,
-	PDFDocumentProxy,
+	type PDFDocumentProxy,
 } from './util/pdfjs.js';
 
 interface RawOutline {
