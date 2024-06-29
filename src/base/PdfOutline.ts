@@ -1,4 +1,4 @@
-import { Outline, OutlineProperties } from '@pixdif/parser';
+import { Outline, type OutlineProperties } from '@pixdif/parser';
 import type { PDFDocumentProxy } from '../util/pdfjs.js';
 
 import PdfPage from './PdfPage.js';

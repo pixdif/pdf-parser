@@ -1,6 +1,6 @@
 # Pixdif PDF Parser
 [![Build Status](https://github.com/pixdif/pdf-parser/workflows/Node.js%20CI/badge.svg?branch=main)](https://github.com/pixdif/pdf-parser/actions?query=workflow%3ANode.js%20CI+branch%3Amain)
-[![npm puppeteer package](https://img.shields.io/npm/v/@pixdif/pdf-parser.svg)](https://npmjs.org/package/@pixdif/pdf-parser)
+[![Npm Package](https://img.shields.io/npm/v/@pixdif/pdf-parser.svg)](https://npmjs.org/package/@pixdif/pdf-parser)
 
 A PDF parser for [pixdif](https://github.com/pixdif/pixdif) to read PDF files and render each page into an image (PNG format), inspired by [pdf.js](https://github.com/mozilla/pdf.js) and [node-canvas](https://github.com/Automattic/node-canvas).
 

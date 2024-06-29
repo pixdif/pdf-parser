@@ -1,4 +1,4 @@
-import { Parser, Outline } from '@pixdif/parser';
+import { Parser, type Outline } from '@pixdif/parser';
 
 import PdfOutline from './base/PdfOutline.js';
 import PdfPage from './base/PdfPage.js';
