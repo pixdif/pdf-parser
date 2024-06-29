@@ -32,6 +32,7 @@ jobs:
           npm pkg delete scripts
           npm pkg delete devDependencies
           cp ../LICENSE .
+          cp ../README.md .
           npm publish --access=public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

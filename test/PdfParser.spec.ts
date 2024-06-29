@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { finished } from 'stream/promises';
 import {
 	describe,
 	it,
@@ -34,9 +35,7 @@ describe('Simple PDF File', () => {
 		const output = fs.createWriteStream('output/shape.png');
 		const image = await page?.render();
 		image?.pipe(output);
-		await new Promise((resolve) => {
-			output.once('finish', resolve);
-		});
+		await finished(output);
 	});
 
 	it('closes a PDF file', async () => {
