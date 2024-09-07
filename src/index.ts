@@ -63,7 +63,10 @@ export default class PdfParser extends Parser {
 		title,
 		items,
 	}: RawOutline): PdfOutline => {
-		const children = items?.length > 0 ? items.map(this.wrapOutline) : undefined;
+		if (!this.document) {
+			throw new Error('The PDF file is not open yet.');
+		}
+		const children = items && items.length > 0 ? items.map(this.wrapOutline) : undefined;
 		return new PdfOutline(this.document, {
 			title,
 			children,

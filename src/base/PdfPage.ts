@@ -21,7 +21,6 @@ export default class PdfPage extends Page {
 		return this.title;
 	}
 
-	// eslint-disable-next-line class-methods-use-this
 	isCached(): boolean {
 		return false;
 	}
