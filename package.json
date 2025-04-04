@@ -28,8 +28,7 @@
   "homepage": "https://github.com/pixdif/pdf-parser#readme",
   "dependencies": {
     "@pixdif/parser": "^0.10.1",
-    "canvas": "^3.1.0",
-    "pdfjs-dist": "~4.10.38"
+    "pdfjs-dist": "^5.1.91"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",

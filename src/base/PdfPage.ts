@@ -1,20 +1,15 @@
-import type { Readable } from 'stream';
+import { Readable } from 'stream';
 import { Page } from '@pixdif/parser';
-import type { PDFPageProxy } from '../util/pdfjs.js';
-
-import NodeCanvasFactory from './NodeCanvasFactory.js';
-
-const canvasFactory = new NodeCanvasFactory();
+import type { PDFDocumentProxy, PDFPageProxy } from '../util/pdfjs.js';
+import type { NodeCanvasFactory } from './NodeCanvasFactory.js';
 
 export default class PdfPage extends Page {
-	protected readonly title: string;
-
-	protected readonly proxy: PDFPageProxy;
-
-	constructor(title: string, proxy: PDFPageProxy) {
+	constructor(
+		protected readonly document: PDFDocumentProxy,
+		protected readonly title: string,
+		protected readonly proxy: PDFPageProxy,
+	) {
 		super();
-		this.title = title;
-		this.proxy = proxy;
 	}
 
 	getTitle(): string {
@@ -26,15 +21,14 @@ export default class PdfPage extends Page {
 	}
 
 	async render(): Promise<Readable> {
+		const canvasFactory = this.document.canvasFactory as NodeCanvasFactory;
 		const viewport = this.proxy.getViewport({ scale: 2 });
-		const cvs = canvasFactory.create(viewport.width, viewport.height);
+		const { canvas, context } = canvasFactory.create(viewport.width, viewport.height);
 		const renderContext = {
-			canvasContext: cvs.context as unknown as CanvasRenderingContext2D,
+			canvasContext: context,
 			viewport,
-			canvasFactory,
 		};
-
 		await this.proxy.render(renderContext).promise;
-		return cvs.canvas.createPNGStream();
+		return Readable.fromWeb(canvas.encodeStream('png'));
 	}
 }

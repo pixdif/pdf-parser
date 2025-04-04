@@ -30,6 +30,6 @@ export default class PdfOutline extends Outline {
 	async getPage(index: number): Promise<PdfPage> {
 		const pageIndex = this.offset + index;
 		const page = await this.document.getPage(pageIndex);
-		return new PdfPage(`Page ${pageIndex}`, page);
+		return new PdfPage(this.document, `Page ${pageIndex}`, page);
 	}
 }

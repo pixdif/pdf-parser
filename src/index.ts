@@ -48,7 +48,7 @@ export default class PdfParser extends Parser {
 		}
 		const pageIndex = index + 1;
 		const page = await this.document.getPage(pageIndex);
-		return new PdfPage(`Page ${pageIndex}`, page);
+		return new PdfPage(this.document, `Page ${pageIndex}`, page);
 	}
 
 	override async getOutline(): Promise<Outline[]> {
